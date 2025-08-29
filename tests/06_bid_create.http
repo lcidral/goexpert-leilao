@@ -1,0 +1,25 @@
+### Teste 06: Criar um lance
+### Execute após o teste 03
+### IMPORTANTE: Execute este teste 4 vezes rápidas ou aguarde 20s para ver os resultados
+### (devido ao batch insert configurado)
+
+@host = localhost
+@port = 8080
+@base = http://{{host}}:{{port}}
+
+# IMPORTANTE: Substitua o auctionId pelo ID do leilão criado no teste 01 (obtido no teste 02)
+@auctionId = SUBSTITUA_PELO_ID_DO_TESTE_02
+
+# Este usuário é criado automaticamente pelo script de inicialização do MongoDB
+@userId = 11111111-1111-1111-1111-111111111111
+
+### Criar um lance
+### Execute 4 vezes para forçar o flush do batch ou aguarde o intervalo de batch (20s)
+POST {{base}}/bid
+Content-Type: application/json
+
+{
+  "auction_id": "{{auctionId}}",
+  "user_id": "{{userId}}",
+  "amount": 150.00
+}

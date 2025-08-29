@@ -1,0 +1,23 @@
+### Teste 05: Criar leilão inválido (teste de validação)
+### Execute a qualquer momento para testar validações
+### Deve retornar erro 400 Bad Request
+
+@host = localhost
+@port = 8080
+@base = http://{{host}}:{{port}}
+
+### Criar leilão inválido (espera 400)
+### Erros esperados:
+### - product_name muito curto (mínimo 2 caracteres)
+### - category muito curta (mínimo 3 caracteres)
+### - description muito curta (mínimo 10 caracteres)
+### - condition inválida (deve ser 1=New ou 2=Used)
+POST {{base}}/auction
+Content-Type: application/json
+
+{
+  "product_name": "X",
+  "category": "ab",
+  "description": "curta",
+  "condition": 3
+}

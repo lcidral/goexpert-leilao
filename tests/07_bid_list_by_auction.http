@@ -1,0 +1,14 @@
+### Teste 07: Listar lances do leilão
+### Execute após o teste 06
+### Se não aparecerem lances, aguarde 20s ou execute o teste 06 mais 3 vezes
+
+@host = localhost
+@port = 8080
+@base = http://{{host}}:{{port}}
+
+# IMPORTANTE: Substitua este ID pelo ID do leilão criado no teste 01 (obtido no teste 02)
+@auctionId = SUBSTITUA_PELO_ID_DO_TESTE_02
+
+### Listar lances do leilão
+### Nota: Lances são inseridos em batch (MAX_BATCH_SIZE=4 ou BATCH_INSERT_INTERVAL=20s)
+GET {{base}}/bid/{{auctionId}}

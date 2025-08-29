@@ -1,0 +1,15 @@
+### Teste 08: Buscar usuário por ID
+### Execute a qualquer momento
+### Este usuário é criado automaticamente na inicialização do MongoDB
+
+@host = localhost
+@port = 8080
+@base = http://{{host}}:{{port}}
+
+# Este usuário é criado automaticamente pelo script de inicialização do MongoDB
+# Se retornar 404, verifique se o script de init foi executado (docker compose down -v e up novamente)
+@userId = 11111111-1111-1111-1111-111111111111
+
+### Buscar usuário por ID
+### Deve retornar: {"id": "11111111-1111-1111-1111-111111111111", "name": "Demo User"}
+GET {{base}}/user/{{userId}}

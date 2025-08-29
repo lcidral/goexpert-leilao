@@ -53,8 +53,8 @@ type ProductCondition int
 type AuctionStatus int
 
 const (
-	Active AuctionStatus = iota
-	Completed
+	Completed AuctionStatus = iota
+	Active
 )
 
 const (

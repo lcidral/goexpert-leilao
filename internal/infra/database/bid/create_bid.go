@@ -97,7 +97,8 @@ func (bd *BidRepository) CreateBid(
 			bd.auctionStatusMapMutex.Unlock()
 
 			bd.auctionEndTimeMutex.Lock()
-			bd.auctionEndTimeMap[bidValue.AuctionId] = auctionEntity.Timestamp.Add(bd.auctionInterval)
+			// AuctionEntity.Timestamp now represents the expiration moment.
+			bd.auctionEndTimeMap[bidValue.AuctionId] = auctionEntity.Timestamp
 			bd.auctionEndTimeMutex.Unlock()
 
 			if _, err := bd.Collection.InsertOne(ctx, bidEntityMongo); err != nil {

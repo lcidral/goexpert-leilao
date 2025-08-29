@@ -1,0 +1,14 @@
+### Teste 04: Consultar vencedor do leilão
+### Execute após criar lances (teste 06) e aguardar o fechamento automático
+### SUBSTITUA o valor de @auctionId pelo ID obtido no teste 02
+
+@host = localhost
+@port = 8080
+@base = http://{{host}}:{{port}}
+
+# IMPORTANTE: Substitua este ID pelo ID do leilão criado no teste 01 (obtido no teste 02)
+@auctionId = SUBSTITUA_PELO_ID_DO_TESTE_02
+
+### Consultar vencedor do leilão
+### Nota: Só retornará um vencedor após o leilão ser fechado automaticamente
+GET {{base}}/auction/winner/{{auctionId}}

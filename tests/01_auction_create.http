@@ -1,0 +1,19 @@
+### Teste 01: Criar um leilão válido
+### Execute este teste primeiro para criar um leilão
+### Anote o ID retornado no teste 02 para usar nos testes seguintes
+
+@host = localhost
+@port = 8080
+@base = http://{{host}}:{{port}}
+@category = electronics
+
+### Criar um leilão válido
+POST {{base}}/auction
+Content-Type: application/json
+
+{
+  "product_name": "Notebook Gamer Dell",
+  "category": "{{category}}",
+  "description": "Notebook RTX 3060, 16GB RAM, SSD 1TB - Excelente para jogos",
+  "condition": 1
+}

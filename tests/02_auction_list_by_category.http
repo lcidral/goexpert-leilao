@@ -1,0 +1,11 @@
+### Teste 02: Listar leilões por categoria
+### Execute após o teste 01
+### IMPORTANTE: Anote o ID do leilão retornado para usar nos próximos testes
+
+@host = localhost
+@port = 8080
+@base = http://{{host}}:{{port}}
+@category = electronics
+
+### Listar leilões por categoria (status=0 remove filtro de status)
+GET {{base}}/auction?status=0&category={{category}}&productName=

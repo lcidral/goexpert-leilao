@@ -5,6 +5,7 @@ import (
 	"fullcycle-auction_go/configuration/logger"
 	"fullcycle-auction_go/internal/entity/auction_entity"
 	"fullcycle-auction_go/internal/internal_error"
+	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -18,19 +19,23 @@ type AuctionEntityMongo struct {
 	Status      auction_entity.AuctionStatus    `bson:"status"`
 	Timestamp   int64                           `bson:"timestamp"`
 }
+
 type AuctionRepository struct {
-	Collection *mongo.Collection
+	Collection      *mongo.Collection
+	DefaultDuration time.Duration
 }
 
-func NewAuctionRepository(database *mongo.Database) *AuctionRepository {
+func NewAuctionRepository(database *mongo.Database, defaultDuration time.Duration) *AuctionRepository {
 	return &AuctionRepository{
-		Collection: database.Collection("auctions"),
+		Collection:      database.Collection("auctions"),
+		DefaultDuration: defaultDuration,
 	}
 }
 
 func (ar *AuctionRepository) CreateAuction(
 	ctx context.Context,
 	auctionEntity *auction_entity.Auction) *internal_error.InternalError {
+	expiration := time.Now().Add(ar.DefaultDuration)
 	auctionEntityMongo := &AuctionEntityMongo{
 		Id:          auctionEntity.Id,
 		ProductName: auctionEntity.ProductName,
@@ -38,7 +43,7 @@ func (ar *AuctionRepository) CreateAuction(
 		Description: auctionEntity.Description,
 		Condition:   auctionEntity.Condition,
 		Status:      auctionEntity.Status,
-		Timestamp:   auctionEntity.Timestamp.Unix(),
+		Timestamp:   expiration.Unix(),
 	}
 	_, err := ar.Collection.InsertOne(ctx, auctionEntityMongo)
 	if err != nil {

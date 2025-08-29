@@ -91,10 +91,12 @@ func (bu *BidUseCase) triggerCreateRoutine(ctx context.Context) {
 					bu.timer.Reset(bu.batchInsertInterval)
 				}
 			case <-bu.timer.C:
-				if err := bu.BidRepository.CreateBid(ctx, bidBatch); err != nil {
-					logger.Error("error trying to process bid batch list", err)
+				if len(bidBatch) > 0 {
+					if err := bu.BidRepository.CreateBid(ctx, bidBatch); err != nil {
+						logger.Error("error trying to process bid batch list", err)
+					}
+					bidBatch = nil
 				}
-				bidBatch = nil
 				bu.timer.Reset(bu.batchInsertInterval)
 			}
 		}
