@@ -1,0 +1,3 @@
+# Local environment and IDE files
+cmd/auction/.env
+.idea/
